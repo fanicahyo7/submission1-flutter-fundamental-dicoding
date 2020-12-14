@@ -1,16 +1,15 @@
-import 'dart:convert';
-
 class Menu {
-  List<Food> foods;
-  List<Drink> drinks;
+  final List<Food> foods;
+  final List<Drink> drinks;
 
   Menu({this.foods, this.drinks});
 
-  Menu.fromJson(Map<String, dynamic> json) {
-    foods = List<Food>.from(json['foods'].map((food) => Food.fromJson(food)));
-    drinks =
-        List<Drink>.from(json['drinks'].map((drink) => Drink.fromJson(drink)));
-  }
+  factory Menu.fromJson(Map<String, dynamic> json) => Menu(
+        foods:
+            List<Food>.from(json['foods'].map((food) => Food.fromJson(food))),
+        drinks: List<Drink>.from(
+            json['drinks'].map((drink) => Drink.fromJson(drink))),
+      );
 }
 
 class Food {
@@ -18,19 +17,7 @@ class Food {
 
   Food({this.name});
 
-  Food.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-  }
-}
-
-List<Food> getFoods(String json) {
-  if (json == null) {
-    return [];
-  }
-
-  Map<String, dynamic> map = jsonDecode(json);
-  List<dynamic> data = map["restaurants"]['menus']['foods'];
-  return data.map((json) => Food.fromJson(json)).toList();
+  factory Food.fromJson(Map<String, dynamic> json) => Food(name: json['name']);
 }
 
 class Drink {
@@ -38,7 +25,6 @@ class Drink {
 
   Drink({this.name});
 
-  Drink.fromJson(Map<String, dynamic> json) {
-    name = json[name];
-  }
+  factory Drink.fromJson(Map<String, dynamic> json) =>
+      Drink(name: json['name']);
 }
