@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:submission1_flutter_fundamental_dicoding/models/menu.dart';
+
 class Restaurant {
   String id;
   String name;
@@ -7,6 +9,7 @@ class Restaurant {
   String restaurantPicture;
   String city;
   double rate;
+  Menu menus;
 
   Restaurant(
       {this.id,
@@ -14,7 +17,8 @@ class Restaurant {
       this.description,
       this.restaurantPicture,
       this.city,
-      this.rate});
+      this.rate,
+      this.menus});
 
   Restaurant.fromJson(Map<String, dynamic> resto) {
     id = resto['id'];
@@ -23,6 +27,7 @@ class Restaurant {
     restaurantPicture = resto['pictureId'];
     city = resto['city'];
     rate = resto['rating'].toDouble();
+    menus = Menu.fromJson(resto['menus']);
   }
 }
 
