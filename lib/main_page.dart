@@ -64,78 +64,81 @@ Widget _listRestoItem(
     onTap: () {
       Navigator.pushNamed(context, PageDetail.routeName, arguments: restaurant);
     },
-    child: Card(
-      margin:
-          EdgeInsets.fromLTRB(16, 12, 16, (restaurant == resto.last) ? 12 : 0),
-      elevation: 1,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(15))),
-      child: Column(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                margin: EdgeInsets.only(right: 6),
-                height: 100,
-                width: 150,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                    image: DecorationImage(
-                        image: NetworkImage(restaurant.restaurantPicture),
-                        fit: BoxFit.cover)),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                      margin: EdgeInsets.only(top: 6, bottom: 10),
-                      child: Text(
-                        restaurant.name,
-                        style: font1,
-                      )),
-                  Container(
-                    margin: EdgeInsets.only(bottom: 10),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.pin_drop,
-                          color: Colors.grey,
-                        ),
-                        Text(
-                          restaurant.city,
-                          style: font2,
-                        ),
-                      ],
+    child: Hero(
+      tag: restaurant.restaurantPicture,
+      child: Card(
+        margin: EdgeInsets.fromLTRB(
+            16, 12, 16, (restaurant == resto.last) ? 12 : 0),
+        elevation: 1,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15))),
+        child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(right: 6),
+                  height: 100,
+                  width: 150,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      image: DecorationImage(
+                          image: NetworkImage(restaurant.restaurantPicture),
+                          fit: BoxFit.cover)),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                        margin: EdgeInsets.only(top: 6, bottom: 10),
+                        child: Text(
+                          restaurant.name,
+                          style: font1,
+                        )),
+                    Container(
+                      margin: EdgeInsets.only(bottom: 10),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.pin_drop,
+                            color: Colors.grey,
+                          ),
+                          Text(
+                            restaurant.city,
+                            style: font2,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    child: Row(
-                      children: List<Widget>.generate(
-                              5,
-                              (index) => Icon(
-                                    (index < restaurant.rate.round())
-                                        ? MdiIcons.star
-                                        : MdiIcons.starOutline,
-                                    size: 16,
-                                    color: Colors.amber,
-                                  )) +
-                          [
-                            SizedBox(
-                              width: 4,
-                            ),
-                            Text(
-                              restaurant.rate.toString(),
-                              style: font2,
-                            )
-                          ],
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),
-        ],
+                    Container(
+                      child: Row(
+                        children: List<Widget>.generate(
+                                5,
+                                (index) => Icon(
+                                      (index < restaurant.rate.round())
+                                          ? MdiIcons.star
+                                          : MdiIcons.starOutline,
+                                      size: 16,
+                                      color: Colors.amber,
+                                    )) +
+                            [
+                              SizedBox(
+                                width: 4,
+                              ),
+                              Text(
+                                restaurant.rate.toString(),
+                                style: font2,
+                              )
+                            ],
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     ),
   );

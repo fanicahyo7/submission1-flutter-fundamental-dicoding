@@ -23,13 +23,16 @@ class PageDetail extends StatelessWidget {
               child: SingleChildScrollView(
             child: Stack(
               children: [
-                Container(
-                  width: double.infinity,
-                  height: 300,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(restaurant.restaurantPicture),
-                          fit: BoxFit.cover)),
+                Hero(
+                  tag: restaurant.restaurantPicture,
+                  child: Container(
+                    width: double.infinity,
+                    height: 300,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(restaurant.restaurantPicture),
+                            fit: BoxFit.cover)),
+                  ),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,7 +46,16 @@ class PageDetail extends StatelessWidget {
                             onTap: () {
                               Navigator.pop(context);
                             },
-                            child: Icon(Icons.arrow_back, color: Colors.white)),
+                            child: Container(
+                                height: 30,
+                                width: 30,
+                                padding: EdgeInsets.all(3),
+                                decoration: BoxDecoration(
+                                  color: Colors.black54,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Icon(Icons.arrow_back,
+                                    color: Colors.white))),
                       ),
                     ),
                     Container(
@@ -81,45 +93,85 @@ class PageDetail extends StatelessWidget {
                                 'Menu',
                                 style: font1.copyWith(fontSize: 15),
                               )),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
-                                children: [
-                                  Container(
-                                      margin: EdgeInsets.symmetric(vertical: 6),
-                                      child: Text(
-                                        'Foods',
-                                        style: font1.copyWith(fontSize: 15),
-                                      )),
-                                  Column(
-                                    children: restaurant.menus.foods
-                                        .map((e) => Text(e.name))
-                                        .toList(),
-                                  )
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  Container(
-                                      margin: EdgeInsets.symmetric(vertical: 6),
-                                      child: Text(
-                                        'Drinks',
-                                        style: font1.copyWith(fontSize: 15),
-                                      )),
-                                  Column(
-                                    children: restaurant.menus.drinks
-                                        .map((e) => Text(e.name))
-                                        .toList(),
-                                  )
-                                ],
-                              ),
-                            ],
+                          Container(
+                              margin: EdgeInsets.symmetric(vertical: 6),
+                              child: Text(
+                                'Foods',
+                                style: font1.copyWith(fontSize: 15),
+                              )),
+                          Container(
+                            height: 70,
+                            width: double.infinity,
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: restaurant.menus.foods
+                                  .map((e) => Container(
+                                      margin: EdgeInsets.only(right: 10),
+                                      width: 120,
+                                      decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                              begin: Alignment.topLeft,
+                                              end: Alignment.bottomRight,
+                                              colors: [
+                                            Colors.amber,
+                                            Colors.white
+                                          ])),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            e.name,
+                                            textAlign: TextAlign.center,
+                                            style: font1,
+                                            maxLines: 1,
+                                          ),
+                                        ],
+                                      )))
+                                  .toList(),
+                            ),
                           ),
+                          Container(
+                              margin: EdgeInsets.symmetric(vertical: 6),
+                              child: Text(
+                                'Drinks',
+                                style: font1.copyWith(fontSize: 15),
+                              )),
+                          Container(
+                            height: 70,
+                            width: double.infinity,
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: restaurant.menus.drinks
+                                  .map((e) => Container(
+                                      margin: EdgeInsets.only(right: 10),
+                                      width: 120,
+                                      decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                              begin: Alignment.topLeft,
+                                              end: Alignment.bottomRight,
+                                              colors: [
+                                            Colors.amber,
+                                            Colors.white
+                                          ])),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            e.name,
+                                            textAlign: TextAlign.center,
+                                            style: font1,
+                                            maxLines: 1,
+                                          ),
+                                        ],
+                                      )))
+                                  .toList(),
+                            ),
+                          )
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
               ],
